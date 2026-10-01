@@ -73,6 +73,95 @@
 </head>
 <body>
 
+  <!-- ================= TELA DE INICIALIZAÇÃO: VELOCÍMETRO R8 LAUNCH CONTROL ================= -->
+  <aside class="speedo-intro" id="speedoIntro" aria-label="Aceleração de Inicialização R8 Motors">
+    <div class="speedo-intro__backdrop" aria-hidden="true"></div>
+    <div class="speedo-intro__glow" aria-hidden="true"></div>
+    <div class="speedo-intro__flash" id="speedoFlash" aria-hidden="true"></div>
+
+    <div class="speedo-intro__container">
+      <!-- Status Superior & Botão Pular -->
+      <div class="speedo-intro__header">
+        <div class="speedo-intro__status">
+          <span class="speedo-intro__dot"></span>
+          <span>LAUNCH CONTROL &bull; SPORT PLUS</span>
+        </div>
+        <button type="button" class="speedo-intro__skip" id="speedoSkip" aria-label="Pular introdução">
+          Pular <span>[ESC]</span>
+        </button>
+      </div>
+
+      <!-- Dial do Velocímetro -->
+      <div class="speedo-gauge">
+        <svg class="speedo-gauge__svg" viewBox="0 0 320 320" width="320" height="320" aria-hidden="true">
+          <defs>
+            <linearGradient id="speedoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38BDF8" />
+              <stop offset="50%" stop-color="#D8001D" />
+              <stop offset="100%" stop-color="#FF3B47" />
+            </linearGradient>
+            <filter id="speedoGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Trilho de fundo do velocímetro (260 graus, r=120, circunf=753.98, arco=544.54) -->
+          <circle class="speedo-gauge__track" cx="160" cy="160" r="120" />
+
+          <!-- Ticks da escala esportiva -->
+          <g class="speedo-gauge__ticks">
+            <line x1="160" y1="34" x2="160" y2="48" transform="rotate(-50 160 160)" class="speedo-tick" />
+            <line x1="160" y1="36" x2="160" y2="46" transform="rotate(2 160 160)" class="speedo-tick" />
+            <line x1="160" y1="36" x2="160" y2="46" transform="rotate(54 160 160)" class="speedo-tick" />
+            <line x1="160" y1="36" x2="160" y2="46" transform="rotate(106 160 160)" class="speedo-tick" />
+            <line x1="160" y1="36" x2="160" y2="46" transform="rotate(158 160 160)" class="speedo-tick" />
+            <line x1="160" y1="34" x2="160" y2="48" transform="rotate(210 160 160)" class="speedo-tick speedo-tick--red" />
+          </g>
+
+          <!-- Arco Dinâmico de Aceleração -->
+          <circle 
+            class="speedo-gauge__progress" 
+            id="speedoProgress" 
+            cx="160" 
+            cy="160" 
+            r="120" 
+            filter="url(#speedoGlowFilter)"
+          />
+        </svg>
+
+        <!-- Núcleo do Velocímetro: Logo R8 no Centro + Display Digital -->
+        <div class="speedo-gauge__center">
+          <div class="speedo-gauge__logo-wrap">
+            <img src="assets/logo.svg" alt="R8 Motors Oficial" class="speedo-gauge__logo" width="136" height="38">
+          </div>
+
+          <div class="speedo-gauge__readout">
+            <span class="speedo-gauge__number tabular-nums" id="speedoNumber">0</span>
+            <span class="speedo-gauge__unit">KM/H</span>
+          </div>
+
+          <div class="speedo-gauge__telemetry">
+            <span class="speedo-gauge__gear" id="speedoGear">D1</span>
+            <span class="speedo-gauge__divider"></span>
+            <span class="speedo-gauge__target">0 &rarr; 100</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Tacômetro / RPM -->
+      <div class="speedo-rpm">
+        <div class="speedo-rpm__header">
+          <span>TACÔMETRO DIGITAL</span>
+          <span class="speedo-rpm__val tabular-nums" id="speedoRpmVal">800 RPM</span>
+        </div>
+        <div class="speedo-rpm__track">
+          <div class="speedo-rpm__fill" id="speedoRpmFill"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <!-- ================= TOPBAR INSTITUCIONAL ================= -->
   <aside class="topbar" aria-label="Informações de Atendimento">
     <div class="container topbar__inner">

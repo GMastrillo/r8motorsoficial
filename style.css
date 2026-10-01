@@ -281,6 +281,318 @@ ul, ol {
 .icon-gold { color: var(--color-accent-gold); }
 
 /* ==========================================================================
+   TELA DE INICIALIZAÇÃO / VELOCÍMETRO DIGITAL (0-100 LAUNCH CONTROL)
+   ========================================================================== */
+
+.speedo-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: radial-gradient(circle at 50% 50%, #0c1445 0%, #030511 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: opacity, transform;
+  user-select: none;
+}
+
+.speedo-intro__backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.speedo-intro__glow {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 0, 29, 0.3) 0%, rgba(10, 19, 110, 0.45) 50%, transparent 75%);
+  filter: blur(80px);
+  pointer-events: none;
+  animation: speedo-pulse-glow 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes speedo-pulse-glow {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+.speedo-intro__flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, rgba(216, 0, 29, 0.8) 45%, #05081A 85%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  will-change: opacity;
+}
+
+.speedo-intro__container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  max-width: 90vw;
+}
+
+.speedo-intro__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 340px;
+  padding: 0 4px;
+}
+
+.speedo-intro__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: #94A3B8;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.speedo-intro__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-brand-red);
+  box-shadow: 0 0 10px var(--color-brand-red);
+  animation: speedo-dot-pulse 1s infinite alternate;
+}
+
+@keyframes speedo-dot-pulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px #FF3B47; }
+}
+
+.speedo-intro__skip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border-medium);
+  color: var(--color-text-secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.speedo-intro__skip span {
+  color: var(--color-text-muted);
+  font-size: 0.65rem;
+  margin-left: 2px;
+}
+
+.speedo-intro__skip:hover {
+  background: rgba(216, 0, 29, 0.25);
+  border-color: var(--color-brand-red);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.speedo-gauge {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speedo-gauge__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.speedo-gauge__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 544.54 753.98;
+  transform: rotate(140deg);
+  transform-origin: 160px 160px;
+}
+
+.speedo-gauge__progress {
+  fill: none;
+  stroke: url(#speedoGrad);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 544.54 753.98;
+  stroke-dashoffset: 544.54;
+  transform: rotate(140deg);
+  transform-origin: 160px 160px;
+  transition: stroke-dashoffset 0.04s linear;
+  will-change: stroke-dashoffset;
+}
+
+.speedo-tick {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.speedo-tick--red {
+  stroke: var(--color-brand-red);
+  stroke-width: 3.5;
+  filter: drop-shadow(0 0 6px var(--color-brand-red));
+}
+
+.speedo-gauge__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  padding-top: 10px;
+}
+
+.speedo-gauge__logo-wrap {
+  margin-bottom: 2px;
+}
+
+.speedo-gauge__logo {
+  height: 36px;
+  width: auto;
+  filter: drop-shadow(0 0 24px rgba(216, 0, 29, 0.5));
+}
+
+.speedo-gauge__readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  margin: 2px 0 6px;
+}
+
+.speedo-gauge__number {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: var(--font-weight-black);
+  color: #FFFFFF;
+  line-height: 0.95;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 10px rgba(216, 0, 29, 0.5);
+}
+
+.speedo-gauge__unit {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: #FF3B47;
+  text-transform: uppercase;
+  margin-top: 3px;
+  text-shadow: 0 0 10px rgba(216, 0, 29, 0.8);
+}
+
+.speedo-gauge__telemetry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-subtle);
+  backdrop-filter: blur(8px);
+}
+
+.speedo-gauge__gear {
+  color: #38BDF8;
+  font-weight: 800;
+}
+
+.speedo-gauge__divider {
+  width: 1px;
+  height: 12px;
+  background: var(--color-border-medium);
+}
+
+.speedo-gauge__target {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.speedo-rpm {
+  width: 100%;
+  max-width: 290px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.speedo-rpm__header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+.speedo-rpm__val {
+  color: #E2E8F0;
+}
+
+.speedo-rpm__track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.speedo-rpm__fill {
+  width: 12%;
+  height: 100%;
+  background: linear-gradient(90deg, #1E34C8 0%, #D8001D 70%, #FF3B47 100%);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 12px #D8001D;
+  transition: width 0.04s linear;
+  will-change: width;
+}
+
+@media (max-width: 380px) {
+  .speedo-gauge {
+    width: 280px;
+    height: 280px;
+  }
+  .speedo-gauge__number {
+    font-size: 3.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speedo-intro {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
    TOPBAR
    ========================================================================== */
 

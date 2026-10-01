@@ -56,8 +56,125 @@ const initR8App = () => {
     }
   }
 
-  // 4. Disparo Imediato da Orquestração GSAP
-  initGSAPMotionSuite();
+  // 4. Tela de Inicialização: Velocímetro Digital (0 a 100 km/h) com Logo Centralizada
+  const speedoIntro = document.getElementById('speedoIntro');
+  let motionSuiteStarted = false;
+
+  const startShowroomExperience = () => {
+    if (motionSuiteStarted) return;
+    motionSuiteStarted = true;
+    initGSAPMotionSuite();
+  };
+
+  if (speedoIntro) {
+    if (prefersReducedMotion || typeof gsap === 'undefined') {
+      speedoIntro.remove();
+      startShowroomExperience();
+    } else {
+      const speedoNumber = document.getElementById('speedoNumber');
+      const speedoProgress = document.getElementById('speedoProgress');
+      const speedoRpmVal = document.getElementById('speedoRpmVal');
+      const speedoRpmFill = document.getElementById('speedoRpmFill');
+      const speedoGear = document.getElementById('speedoGear');
+      const speedoSkip = document.getElementById('speedoSkip');
+      const speedoFlash = document.getElementById('speedoFlash');
+
+      const ARC_LENGTH = 544.54;
+      const speedState = { speed: 0, rpm: 800 };
+      let finished = false;
+
+      const completeSpeedo = () => {
+        if (finished) return;
+        finished = true;
+
+        // Flash de aceleração e saída suave
+        if (speedoFlash) {
+          gsap.to(speedoFlash, {
+            opacity: 0.9,
+            duration: 0.15,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power2.inOut'
+          });
+        }
+
+        gsap.to(speedoIntro, {
+          scale: 1.08,
+          opacity: 0,
+          duration: 0.45,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            if (speedoIntro && speedoIntro.parentNode) {
+              speedoIntro.remove();
+            }
+            startShowroomExperience();
+          }
+        });
+      };
+
+      // Animação esportiva de aceleração de 0 a 100 km/h
+      const speedTween = gsap.to(speedState, {
+        speed: 100,
+        rpm: 8400,
+        duration: 1.7,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          const currentSpeed = Math.floor(speedState.speed);
+          if (speedoNumber) speedoNumber.textContent = currentSpeed;
+          
+          if (speedoProgress) {
+            const offset = ARC_LENGTH - (currentSpeed / 100) * ARC_LENGTH;
+            speedoProgress.style.strokeDashoffset = offset;
+          }
+
+          if (speedoRpmVal) {
+            speedoRpmVal.textContent = `${Math.floor(speedState.rpm).toLocaleString('pt-BR')} RPM`;
+          }
+
+          if (speedoRpmFill) {
+            const rpmPct = Math.min(100, Math.max(12, (speedState.rpm / 8500) * 100));
+            speedoRpmFill.style.width = `${rpmPct}%`;
+          }
+
+          if (speedoGear) {
+            if (currentSpeed < 25) speedoGear.textContent = 'D1';
+            else if (currentSpeed < 55) speedoGear.textContent = 'D2';
+            else if (currentSpeed < 85) speedoGear.textContent = 'D3';
+            else speedoGear.textContent = 'D4';
+          }
+        },
+        onComplete: () => {
+          completeSpeedo();
+        }
+      });
+
+      // Pular animação via clique no botão, no fundo ou tecla ESC
+      const skipSpeedo = () => {
+        if (finished) return;
+        speedTween.kill();
+        completeSpeedo();
+      };
+
+      if (speedoSkip) {
+        speedoSkip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          skipSpeedo();
+        });
+      }
+
+      speedoIntro.addEventListener('click', skipSpeedo);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') skipSpeedo();
+      });
+
+      // Salvaguarda absoluta contra qualquer bloqueio
+      setTimeout(() => {
+        if (!finished) skipSpeedo();
+      }, 2600);
+    }
+  } else {
+    startShowroomExperience();
+  }
 
   // 5. Catálogo de Estoque Dinâmico
   const inventory = [
