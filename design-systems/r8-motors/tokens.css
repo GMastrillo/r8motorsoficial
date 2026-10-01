@@ -1,0 +1,115 @@
+/**
+ * R8 MOTORS DESIGN SYSTEM TOKENS
+ * Inspirado na identidade visual oficial da R8 Motors:
+ * Azul Royal Noturno + Vermelho Racing + Branco Puro + Acabamento Automotivo Premium
+ */
+
+:root {
+  /* CORES DA MARCA (HERDADAS DOS POSTS OFICIAIS) */
+  --color-brand-red: #D8001D;
+  --color-brand-red-hover: #F00B2B;
+  --color-brand-red-dark: #A50014;
+  --color-brand-red-glow: rgba(216, 0, 29, 0.35);
+
+  --color-brand-blue: #0A136E;
+  --color-brand-blue-light: #1624A6;
+  --color-brand-blue-dark: #050A36;
+  --color-brand-blue-glow: rgba(10, 19, 110, 0.4);
+
+  /* FUNDOS & SUPERFÍCIES */
+  --color-bg-canvas: #05081A;
+  --color-bg-surface: #0B112C;
+  --color-bg-surface-elevated: #111A3E;
+  --color-bg-surface-card: #0E1636;
+  --color-bg-overlay: rgba(5, 8, 26, 0.85);
+
+  /* TIPOGRAFIA & TEXTO */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #E2E8F0;
+  --color-text-muted: #94A3B8;
+  --color-text-subtle: #64748B;
+  --color-text-inverse: #05081A;
+
+  /* ACENTOS, STATUS & LAUDO PERICIAL */
+  --color-accent-gold: #F59E0B;
+  --color-accent-gold-bg: rgba(245, 158, 11, 0.12);
+  --color-accent-green: #10B981;
+  --color-accent-green-bg: rgba(16, 185, 129, 0.12);
+
+  /* BORDAS & DIVISORES */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-medium: rgba(255, 255, 255, 0.15);
+  --color-border-brand: rgba(216, 0, 29, 0.3);
+  --color-border-blue: rgba(22, 36, 166, 0.3);
+
+  /* TIPOGRAFIA */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, SFMono-Regular, monospace;
+
+  /* ESCALA TIPOGRÁFICA */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 2rem;      /* 32px */
+  --text-4xl: 2.5rem;    /* 40px */
+  --text-5xl: 3.25rem;   /* 52px */
+  --text-6xl: 4.25rem;   /* 68px */
+
+  /* PESOS */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* ESPAÇAMENTOS (ESCALA 4px) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* BORDER RADIUS */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* SOMBRAS ELEVADAS */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.45);
+  --shadow-brand: 0 10px 30px var(--color-brand-red-glow);
+  --shadow-blue: 0 10px 30px var(--color-brand-blue-glow);
+
+  /* TRANSIÇÕES & MOTION */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 180ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+
+  /* LAYOUT */
+  --max-width-container: 1280px;
+  --max-width-wide: 1440px;
+
+  /* Z-INDEX */
+  --z-nav: 50;
+  --z-sticky: 40;
+  --z-modal: 100;
+  --z-floating: 60;
+}

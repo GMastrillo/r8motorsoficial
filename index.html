@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R8 Motors Oficial | Seminovos e Veículos de Leilão com Garantia em Santo André</title>
+  
+  <meta name="description" content="R8 Motors Oficial: Especializada em veículos de leilão, novos e seminovos com garantia e procedência. Financie sem entrada com aprovação expressa via WhatsApp. Av. Martim Francisco, 1104 - Santo André.">
+  <meta name="keywords" content="R8 Motors, carros Santo André, leilão com garantia, financiamento sem entrada, seminovos Santo André, comprar carro ABC">
+  
+  <!-- Open Graph / Redes Sociais -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="R8 Motors Oficial — Financie seu Veículo Sem Entrada">
+  <meta property="og:description" content="Veículos de leilão e seminovos com laudo cautelar aprovado e garantia de procedência. Aprovação de crédito facilitada pelo WhatsApp.">
+  <meta property="og:image" content="assets/hero-cars.png">
+  <meta property="og:url" content="https://r8motorsoficial.com.br">
+  <meta name="theme-color" content="#05081A">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tokens & Estilos -->
+  <link rel="stylesheet" href="design-systems/r8-motors/tokens.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Schema.org JSON-LD para SEO Local e Automotivo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "R8 Motors Oficial",
+    "image": "https://r8motorsoficial.com.br/assets/hero-cars.png",
+    "description": "Loja especializada em veículos de leilão, novos e seminovos com garantia e procedência em Santo André. Financiamento sem entrada.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Martim Francisco, 1104",
+      "addressLocality": "Santo André",
+      "addressRegion": "SP",
+      "postalCode": "09230-700",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -23.6331,
+      "longitude": -46.5165
+    },
+    "telephone": "+551149753270",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "15:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/r8motorsoficial/",
+      "https://www.facebook.com/r8motorsoficial"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ================= TOPBAR INSTITUCIONAL ================= -->
+  <aside class="topbar" aria-label="Informações de Atendimento">
+    <div class="container topbar__inner">
+      <div class="topbar__info">
+        <span class="topbar__item">
+          <i data-lucide="map-pin" class="icon-sm"></i>
+          Av. Martim Francisco, 1104 - Santo André / SP
+        </span>
+        <span class="topbar__item topbar__item--hide-mobile">
+          <i data-lucide="clock" class="icon-sm"></i>
+          Seg a Sex: 09h às 19h | Sáb: 09h às 15h
+        </span>
+      </div>
+      <div class="topbar__actions">
+        <a href="https://www.instagram.com/r8motorsoficial/" target="_blank" rel="noopener" class="topbar__link" aria-label="Instagram R8 Motors">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          <span>@r8motorsoficial</span>
+        </a>
+        <a href="https://wa.me/551149753270?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20ve%C3%ADculos%20da%20R8%20Motors." target="_blank" rel="noopener" class="topbar__phone" aria-label="Telefone e WhatsApp R8 Motors">
+          <i data-lucide="phone-call" class="icon-sm"></i>
+          <span>(11) 4975-3270</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#hero" class="navbar__brand" aria-label="R8 Motors Início">
+        <img src="assets/logo.svg" alt="R8 Motors Oficial" class="navbar__logo" width="170" height="48">
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="navbar__nav" aria-label="Navegação Principal">
+        <ul class="navbar__list">
+          <li><a href="#estoque" class="navbar__link">Estoque</a></li>
+          <li><a href="#simulador" class="navbar__link">Financie Sem Entrada</a></li>
+          <li><a href="#procedencia" class="navbar__link">Garantia & Procedência</a></li>
+          <li><a href="#avaliacao" class="navbar__link">Venda seu Carro</a></li>
+          <li><a href="#localizacao" class="navbar__link">Showroom</a></li>
+        </ul>
+      </nav>
+
+      <!-- Ação Direta -->
+      <div class="navbar__cta">
+        <a href="https://wa.me/551149753270?text=Ol%C3%A1!%20Quero%20simular%20o%20financiamento%20sem%20entrada%20com%20a%20R8%20Motors." target="_blank" rel="noopener" class="btn btn--brand btn--sm">
+          <i data-lucide="message-circle" class="icon-sm"></i>
+          <span>Aprovar Crédito</span>
+        </a>
+
+        <!-- Botão Menu Mobile -->
+        <button type="button" class="navbar__toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Abrir Menu">
+          <i data-lucide="menu" class="icon-md"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Gaveta Mobile -->
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer__header">
+        <img src="assets/logo.svg" alt="R8 Motors" width="140" height="40">
+        <button type="button" class="mobile-drawer__close" id="menuClose" aria-label="Fechar Menu">
+          <i data-lucide="x" class="icon-md"></i>
+        </button>
+      </div>
+      <ul class="mobile-drawer__list">
+        <li><a href="#estoque" class="mobile-drawer__link">Estoque de Veículos</a></li>
+        <li><a href="#simulador" class="mobile-drawer__link">Simular Financiamento</a></li>
+        <li><a href="#procedencia" class="mobile-drawer__link">Garantia & Laudo Cautelar</a></li>
+        <li><a href="#avaliacao" class="mobile-drawer__link">Avaliar Carro na Troca</a></li>
+        <li><a href="#localizacao" class="mobile-drawer__link">Localização & Contato</a></li>
+      </ul>
+      <div class="mobile-drawer__footer">
+        <a href="https://wa.me/551149753270?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20R8%20Motors%20e%20gostaria%20de%20atendimento." target="_blank" rel="noopener" class="btn btn--brand btn--full">
+          <i data-lucide="message-circle" class="icon-sm"></i>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero" id="hero" aria-label="Apresentação R8 Motors">
+      <div class="hero__glow hero__glow--blue" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--red" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <!-- Texto / Proposta de Valor -->
+        <div class="hero__content">
+          <div class="badge badge--pill badge--brand hero__badge">
+            <span class="badge__dot"></span>
+            Especialista em Seminovos &amp; Veículos de Leilão
+          </div>
+
+          <h1 class="hero__title">
+            FINANCIE SEU NOVO VEÍCULO <span class="text-highlight">SEM ENTRADA</span>
+          </h1>
+
+          <p class="hero__subtitle">
+            Curadoria rigorosa de seminovos periciados com <strong>laudo cautelar 100% aprovado</strong>, 
+            garantia de procedência e as menores taxas de juros de São Paulo e região.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#simulador" class="btn btn--brand btn--lg shadow-glow">
+              <i data-lucide="calculator" class="icon-sm"></i>
+              <span>Simular Parcela Sem Entrada</span>
+            </a>
+            <a href="#estoque" class="btn btn--outline btn--lg">
+              <i data-lucide="car" class="icon-sm"></i>
+              <span>Ver Estoque em Loja</span>
+            </a>
+          </div>
+
+          <!-- Métricas e Pontos de Confiança -->
+          <div class="hero__stats">
+            <div class="stat-item">
+              <span class="stat-item__value tabular-nums">+1.800</span>
+              <span class="stat-item__label">Carros Entregues</span>
+            </div>
+            <div class="stat-item__divider"></div>
+            <div class="stat-item">
+              <span class="stat-item__value">100%</span>
+              <span class="stat-item__label">Periciado com Laudo</span>
+            </div>
+            <div class="stat-item__divider"></div>
+            <div class="stat-item">
+              <span class="stat-item__value">Zero</span>
+              <span class="stat-item__label">Burocracia de Crédito</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arte Visual Hero Oficial -->
+        <div class="hero__visual">
+          <div class="hero__image-wrapper">
+            <img src="assets/hero-cars.png" alt="Veículos em Destaque na R8 Motors: Fiat Fastback e Pulse" class="hero__image" width="700" height="700" fetchpriority="high">
+            <div class="hero__card-floating hero__card-floating--left">
+              <div class="hero__card-icon">
+                <i data-lucide="shield-check" class="icon-md"></i>
+              </div>
+              <div>
+                <strong>Garantia Total</strong>
+                <span>Motor e Câmbio revisados</span>
+              </div>
+            </div>
+            <div class="hero__card-floating hero__card-floating--right">
+              <div class="hero__card-icon hero__card-icon--gold">
+                <i data-lucide="zap" class="icon-md"></i>
+              </div>
+              <div>
+                <strong>Crédito Aprovado</strong>
+                <span>Direto pelo WhatsApp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SIMULADOR DE FINANCIAMENTO ================= -->
+    <section class="section section--simulador" id="simulador" aria-label="Simulador de Financiamento Sem Entrada">
+      <div class="container">
+        <div class="simulador-card">
+          <div class="simulador-card__header">
+            <div class="badge badge--brand">Aprovação Imediata</div>
+            <h2 class="simulador-card__title">Simule seu Financiamento Sem Entrada</h2>
+            <p class="simulador-card__desc">
+              Escolha a parcela que cabe no seu bolso. Nossos consultores consultam os principais bancos para aprovar seu crédito com a menor taxa.
+            </p>
+          </div>
+
+          <div class="simulador-card__body">
+            <div class="simulador-form">
+              <!-- Slider de Parcela -->
+              <div class="form-group">
+                <div class="form-group__header">
+                  <label for="rangeParcela" class="form-label">Quanto você deseja pagar por mês?</label>
+                  <span class="form-value tabular-nums" id="valorParcelaDisplay">R$ 1.890 /mês</span>
+                </div>
+                <input type="range" min="890" max="3800" step="50" value="1890" class="range-slider" id="rangeParcela" aria-valuemin="890" aria-valuemax="3800" aria-valuenow="1890">
+                <div class="range-slider__ticks tabular-nums">
+                  <span>R$ 890</span>
+                  <span>R$ 1.890</span>
+                  <span>R$ 2.800</span>
+                  <span>R$ 3.800+</span>
+                </div>
+              </div>
+
+              <!-- Categoria Desejada -->
+              <div class="form-group">
+                <label class="form-label">Qual categoria de carro você procura?</label>
+                <div class="radio-pill-group" role="radiogroup" aria-label="Categoria de Veículo">
+                  <button type="button" class="radio-pill active" data-categoria="SUV">SUV Familiar</button>
+                  <button type="button" class="radio-pill" data-categoria="Hatch">Hatch Econômico</button>
+                  <button type="button" class="radio-pill" data-categoria="Sedan">Sedan Conforto</button>
+                  <button type="button" class="radio-pill" data-categoria="Todos">Qualquer Categoria</button>
+                </div>
+              </div>
+
+              <!-- Prazo -->
+              <div class="form-group">
+                <label class="form-label">Prazo estimado de pagamento:</label>
+                <div class="prazo-tabs" role="tablist">
+                  <button type="button" class="prazo-tab" data-meses="36">36 meses</button>
+                  <button type="button" class="prazo-tab active" data-meses="48">48 meses</button>
+                  <button type="button" class="prazo-tab" data-meses="60">60 meses</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resumo e CTA -->
+            <div class="simulador-summary">
+              <div class="simulador-summary__badge">
+                <i data-lucide="check-circle" class="icon-sm"></i>
+                Score médio ou com pouca entrada
+              </div>
+              <div class="simulador-summary__value-box">
+                <span class="simulador-summary__label">Estimativa Sem Entrada</span>
+                <span class="simulador-summary__price tabular-nums" id="summaryParcelaDisplay">48x de R$ 1.890*</span>
+                <span class="simulador-summary__sub">*Sujeito a análise cadastral bancária imediata</span>
+              </div>
+
+              <a href="#" id="btnAprovarCreditoWhatsApp" target="_blank" rel="noopener" class="btn btn--brand btn--lg btn--full shadow-glow">
+                <i data-lucide="message-square" class="icon-sm"></i>
+                <span>Aprovar Este Crédito no WhatsApp</span>
+              </a>
+
+              <p class="simulador-summary__footnote">
+                <i data-lucide="lock" class="icon-xs"></i>
+                Seus dados são confidenciais e o atendimento é 100% humanizado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VITRINE DE ESTOQUE ================= -->
+    <section class="section section--estoque" id="estoque" aria-label="Estoque de Veículos R8 Motors">
+      <div class="container">
+        <!-- Header da Seção -->
+        <div class="section-header">
+          <div class="section-header__top">
+            <span class="badge badge--brand">Showroom Santo André</span>
+            <span class="stock-counter tabular-nums"><strong id="totalVeiculosCount">8</strong> veículos disponíveis hoje</span>
+          </div>
+          <h2 class="section-title">Encontre seu Próximo Carro</h2>
+          <p class="section-desc">
+            Todos os veículos com histórico periciado, vistoria cautelar 100% aprovada e prontos para entrega imediata.
+          </p>
+        </div>
+
+        <!-- Filtros do Estoque -->
+        <div class="stock-filters">
+          <div class="stock-filters__search">
+            <i data-lucide="search" class="icon-sm"></i>
+            <input type="text" id="searchInput" placeholder="Buscar por modelo, marca ou ano..." aria-label="Buscar veículos no estoque">
+          </div>
+
+          <div class="stock-filters__categories" role="tablist" aria-label="Filtrar por Categoria">
+            <button type="button" class="filter-btn active" data-filter="all">Todos</button>
+            <button type="button" class="filter-btn" data-filter="suv">SUVs</button>
+            <button type="button" class="filter-btn" data-filter="hatch">Hatches</button>
+            <button type="button" class="filter-btn" data-filter="sedan">Sedans</button>
+            <button type="button" class="filter-btn" data-filter="sem-entrada">Financie Sem Entrada</button>
+          </div>
+        </div>
+
+        <!-- Grid de Veículos -->
+        <div class="stock-grid" id="stockGrid">
+          <!-- Os cards de carros serão gerados e gerenciados via JavaScript para filtros instantâneos -->
+        </div>
+
+        <!-- CTA Estoque Completo -->
+        <div class="stock-footer">
+          <p class="stock-footer__text">Não encontrou o modelo exato que procura?</p>
+          <a href="https://wa.me/551149753270?text=Ol%C3%A1!%20Procuro%20um%20ve%C3%ADculo%20espec%C3%ADfico%20que%20n%C3%A3o%20vi%20no%20site.%20Poderiam%20me%20ajudar%3F" target="_blank" rel="noopener" class="btn btn--outline btn--md">
+            <i data-lucide="help-circle" class="icon-sm"></i>
+            <span>Pedir Modelo Específico no Estoque</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BANNERS OFICIAIS & PROCEDÊNCIA ================= -->
+    <section class="section section--procedencia" id="procedencia" aria-label="Garantia e Procedência R8 Motors">
+      <div class="container">
+        <div class="promo-grid">
+          <!-- Banner 1: Garantia e Procedência (Card com Imagem Oficial) -->
+          <div class="promo-card promo-card--primary">
+            <div class="promo-card__image-container">
+              <img src="assets/promo-garantia.png" alt="Novos e Seminovos com Garantia e Procedência - Av. Martim Francisco, 1104 Santo André" class="promo-card__img" loading="lazy" width="600" height="600">
+            </div>
+            <div class="promo-card__content">
+              <div class="badge badge--pill badge--brand">Procedência Assegurada</div>
+              <h3 class="promo-card__title">Novos &amp; Seminovos com Laudo Pericial</h3>
+              <p class="promo-card__text">
+                Transparência absoluta: cada carro passa por rigorosa checagem estrutural, documental e mecânica. 
+                Você sabe exatamente o que está comprando, com garantia de motor e câmbio.
+              </p>
+              <ul class="promo-card__list">
+                <li><i data-lucide="check" class="icon-sm icon-brand"></i> Laudo pericial cautelar sem sinistros</li>
+                <li><i data-lucide="check" class="icon-sm icon-brand"></i> Histórico de quilometragem autêntica</li>
+                <li><i data-lucide="check" class="icon-sm icon-brand"></i> Documentação rigorosamente em dia</li>
+              </ul>
+              <a href="https://wa.me/551149753270?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20laudo%20cautelar%20e%20a%20garantia%20dos%20ve%C3%ADculos." target="_blank" rel="noopener" class="btn btn--brand btn--md">
+                <span>Tirar Dúvidas sobre o Laudo</span>
+                <i data-lucide="arrow-right" class="icon-sm"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Banner 2: Facilidade de Financiamento Sem Entrada (Card com Imagem Oficial) -->
+          <div class="promo-card promo-card--secondary">
+            <div class="promo-card__image-container">
+              <img src="assets/promo-financiamento.png" alt="Financie seu novo veículo sem entrada - R8 Motors" class="promo-card__img" loading="lazy" width="600" height="600">
+            </div>
+            <div class="promo-card__content">
+              <div class="badge badge--pill badge--blue">Condições Especiais</div>
+              <h3 class="promo-card__title">Sem Entrada? A R8 Motors Viabiliza!</h3>
+              <p class="promo-card__text">
+                Trabalhamos com mais de 10 instituições bancárias integradas para garantir a melhor aprovação, 
+                mesmo com score em reconstrução ou sem valor para dar de entrada.
+              </p>
+              <ul class="promo-card__list">
+                <li><i data-lucide="check" class="icon-sm icon-blue"></i> Menores taxas de juros negociadas</li>
+                <li><i data-lucide="check" class="icon-sm icon-blue"></i> Planos em até 60x fixas no boleto</li>
+                <li><i data-lucide="check" class="icon-sm icon-blue"></i> Aceitamos seu usado como entrada</li>
+              </ul>
+              <a href="https://wa.me/551149753270?text=Ol%C3%A1!%20Quero%20fazer%20uma%20an%C3%A1lise%20de%20cr%C3%A9dito%20sem%20entrada%20pelo%20WhatsApp." target="_blank" rel="noopener" class="btn btn--blue btn--md">
+                <span>Consultar meu Crédito Agora</span>
+                <i data-lucide="arrow-right" class="icon-sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PILARES R8 MOTORS ================= -->
+    <section class="section section--features" aria-label="Diferenciais da R8 Motors">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <i data-lucide="shield-alert" class="icon-lg"></i>
+            </div>
+            <h3 class="feature-item__title">Veículos de Leilão Selecionados</h3>
+            <p class="feature-item__desc">
+              Não vendemos carros com problemas estruturais graves. Selecionamos apenas veículos de procedência com excelente custo-benefício.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <i data-lucide="badge-dollar-sign" class="icon-lg"></i>
+            </div>
+            <h3 class="feature-item__title">Economia de até 30%</h3>
+            <p class="feature-item__desc">
+              Compre um carro de padrão superior pagando muito abaixo da tabela FIPE, com segurança jurídica e laudo transparente.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <i data-lucide="wrench" class="icon-lg"></i>
+            </div>
+            <h3 class="feature-item__title">Revisão Mecânica Completa</h3>
+            <p class="feature-item__desc">
+              Todos os carros são checados por mecânicos especialistas: óleo, freios, suspensão e elétrica antes de entrar na vitrine.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-item__icon">
+              <i data-lucide="user-check" class="icon-lg"></i>
+            </div>
+            <h3 class="feature-item__title">Consultoria Pessoal Sem Pressa</h3>
+            <p class="feature-item__desc">
+              Você fala diretamente com especialistas que entendem de carros, sem pressão ou promessas irreais.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= AVALIE SEU CARRO / TROCA ================= -->
+    <section class="section section--avaliacao" id="avaliacao" aria-label="Avalie seu Veículo na Troca">
+      <div class="container">
+        <div class="trade-box">
+          <div class="trade-box__text">
+            <span class="badge badge--brand">Troca com Troco ou Venda Rápida</span>
+            <h2 class="trade-box__title">Quer Vender ou Dar seu Carro na Troca?</h2>
+            <p class="trade-box__desc">
+              Fazemos a avaliação do seu seminovo em minutos com proposta justa de mercado. 
+              Você pode usar seu usado como entrada para sair de carro novo ou pegar a diferença em dinheiro!
+            </p>
+            <div class="trade-box__steps">
+              <div class="step-card">
+                <span class="step-card__number">1</span>
+                <span>Envie dados e fotos do seu veículo</span>
+              </div>
+              <div class="step-card">
+                <span class="step-card__number">2</span>
+                <span>Receba a avaliação pericial justa</span>
+              </div>
+              <div class="step-card">
+                <span class="step-card__number">3</span>
+                <span>Pagamento rápido ou desconto imediato no novo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trade-box__form-card">
+            <h3 class="trade-box__form-title">Avaliação Rápida Online</h3>
+            <form id="tradeForm" class="trade-form">
+              <div class="form-field">
+                <label for="carModel" class="form-field__label">Marca / Modelo do seu carro:</label>
+                <input type="text" id="carModel" name="carModel" placeholder="Ex: Onix 1.0, Civic 2.0, Polo..." required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="carYear" class="form-field__label">Ano de Fabricação:</label>
+                  <input type="number" id="carYear" name="carYear" placeholder="Ex: 2019" min="2000" max="2026" required>
+                </div>
+                <div class="form-field">
+                  <label for="carKm" class="form-field__label">Km Atual:</label>
+                  <input type="text" id="carKm" name="carKm" placeholder="Ex: 58.000 km">
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="clientPhone" class="form-field__label">Seu WhatsApp para Resposta:</label>
+                <input type="tel" id="clientPhone" name="clientPhone" placeholder="(11) 99999-9999" required>
+              </div>
+
+              <button type="submit" class="btn btn--brand btn--lg btn--full shadow-glow">
+                <i data-lucide="send" class="icon-sm"></i>
+                <span>Enviar para Avaliação no WhatsApp</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SHOWROOM & LOCALIZAÇÃO ================= -->
+    <section class="section section--localizacao" id="localizacao" aria-label="Endereço e Showroom R8 Motors">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge--brand">Venha nos Visitar</span>
+          <h2 class="section-title">Nosso Showroom em Santo André</h2>
+          <p class="section-desc">
+            Espaço físico amplo, ambiente climatizado e café pronto. Venha fazer um test-drive e conferir o estoque de perto.
+          </p>
+        </div>
+
+        <div class="location-grid">
+          <!-- Card de Endereço & Horários -->
+          <div class="location-card">
+            <div class="location-card__item">
+              <div class="location-card__icon">
+                <i data-lucide="map-pin" class="icon-md"></i>
+              </div>
+              <div>
+                <strong>Endereço Oficial</strong>
+                <p>Av. Martim Francisco, 1104 — Vila Alto de Santo André, Santo André - SP, 09230-700</p>
+              </div>
+            </div>
+
+            <div class="location-card__item">
+              <div class="location-card__icon">
+                <i data-lucide="clock" class="icon-md"></i>
+              </div>
+              <div>
+                <strong>Horário de Funcionamento</strong>
+                <p>Segunda a Sexta: 09:00 às 19:00<br>Sábados: 09:00 às 15:00<br>Domingos e Feriados: Plantão WhatsApp</p>
+              </div>
+            </div>
+
+            <div class="location-card__item">
+              <div class="location-card__icon">
+                <i data-lucide="phone" class="icon-md"></i>
+              </div>
+              <div>
+                <strong>Telefones Diretos</strong>
+                <p>(11) 4975-3270 / WhatsApp Comercial</p>
+              </div>
+            </div>
+
+            <div class="location-card__actions">
+              <a href="https://maps.google.com/?q=Av.+Martim+Francisco,+1104+-+Vila+Alto+de+Santo+Andre,+Santo+Andre+-+SP" target="_blank" rel="noopener" class="btn btn--outline btn--md">
+                <i data-lucide="navigation" class="icon-sm"></i>
+                <span>Abrir no Google Maps</span>
+              </a>
+              <a href="https://waze.com/ul?q=Av.+Martim+Francisco,+1104,+Santo+Andre" target="_blank" rel="noopener" class="btn btn--outline btn--md">
+                <i data-lucide="compass" class="icon-sm"></i>
+                <span>Traçar Rota no Waze</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Mapa Interativo Integrado -->
+          <div class="location-map">
+            <iframe 
+              title="Localização da R8 Motors em Santo André"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1d3654.896683833446!2d-46.51867162386925!3d-23.633100878750868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce42d992143003%3A0xe54d80a373fc343!2sAv.%20Martim%20Francisco%2C%201104%20-%20Vila%20Alto%20de%20Santo%20Andr%C3%A9%2C%20Santo%20Andr%C3%A9%20-%20SP%2C%2009230-700!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col--brand">
+        <img src="assets/logo.svg" alt="R8 Motors" class="footer__logo" width="180" height="50">
+        <p class="footer__desc">
+          Sua loja especializada em veículos de leilão, novos e seminovos com garantia e procedência. 
+          Realize o sonho do seu carro novo com parcelas que cabem no seu bolso e aprovação sem entrada.
+        </p>
+        <div class="footer__socials">
+          <a href="https://www.instagram.com/r8motorsoficial/" target="_blank" rel="noopener" aria-label="Instagram R8 Motors">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/r8motorsoficial" target="_blank" rel="noopener" aria-label="Facebook R8 Motors">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/551149753270" target="_blank" rel="noopener" aria-label="WhatsApp R8 Motors">
+            <i data-lucide="message-circle" class="icon-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Navegação Rápida</h4>
+        <ul class="footer__links">
+          <li><a href="#estoque">Estoque em Loja</a></li>
+          <li><a href="#simulador">Financie Sem Entrada</a></li>
+          <li><a href="#procedencia">Garantia e Laudo Cautelar</a></li>
+          <li><a href="#avaliacao">Avaliação do seu Usado</a></li>
+          <li><a href="#localizacao">Showroom Santo André</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Categorias</h4>
+        <ul class="footer__links">
+          <li><a href="#estoque" onclick="filterBy('suv')">SUVs Familiares</a></li>
+          <li><a href="#estoque" onclick="filterBy('hatch')">Hatches Econômicos</a></li>
+          <li><a href="#estoque" onclick="filterBy('sedan')">Sedans Conforto</a></li>
+          <li><a href="#estoque" onclick="filterBy('sem-entrada')">Planos Sem Entrada</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Atendimento Direto</h4>
+        <p class="footer__contact-item">
+          <i data-lucide="phone" class="icon-xs"></i> (11) 4975-3270
+        </p>
+        <p class="footer__contact-item">
+          <i data-lucide="map-pin" class="icon-xs"></i> Av. Martim Francisco, 1104<br>Santo André - SP
+        </p>
+        <div class="footer__badge-secure">
+          <i data-lucide="shield-check" class="icon-md icon-gold"></i>
+          <span>Loja Física Registrada &amp; Periciada</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2026 R8 Motors Oficial (CKD MOTORS LTDA - CNPJ 45.509.667/0001-52). Todos os direitos reservados.</p>
+        <p class="footer__credits">Showroom Digital desenvolvido com padrão de alta performance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= BOTÃO FLUTUANTE DO WHATSAPP ================= -->
+  <aside class="whatsapp-floating" aria-label="Atendimento via WhatsApp">
+    <a href="https://wa.me/551149753270?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20R8%20Motors%20e%20quero%20atendimento%20imediato." target="_blank" rel="noopener" class="whatsapp-floating__btn shadow-glow" aria-label="Abrir WhatsApp da R8 Motors">
+      <div class="whatsapp-floating__radar"></div>
+      <i data-lucide="message-circle" class="whatsapp-floating__icon"></i>
+      <span class="whatsapp-floating__tooltip">
+        <strong>Atendimento Online</strong>
+        <span>Simular sem entrada agora!</span>
+      </span>
+    </a>
+  </aside>
+
+  <!-- ================= MODAL DE DETALHES DO VEÍCULO ================= -->
+  <div class="modal" id="carModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal__overlay" id="modalOverlay"></div>
+    <div class="modal__container">
+      <button type="button" class="modal__close" id="modalClose" aria-label="Fechar Modal">
+        <i data-lucide="x" class="icon-md"></i>
+      </button>
+
+      <div class="modal__body" id="modalBody">
+        <!-- Conteúdo dinâmico injetado via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: Lucide Icons, GSAP, Lenis, Script Principal -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env*.local
+
+# Vercel
+.vercel/
+
+# OS Files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*

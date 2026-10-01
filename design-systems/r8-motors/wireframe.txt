@@ -1,0 +1,79 @@
+================================================================================
+R8 MOTORS OFICIAL - WIREFRAME E ARQUITETURA DE INFORMAÇÃO
+================================================================================
+
+[TOPBAR DE AVISO / CONFIANÇA]
+- Endereço Físico: Av. Martim Francisco, 1104 - Santo André / SP
+- Horário de Atendimento: Seg a Sex 09h às 19h | Sáb 09h às 15h
+- Contato Rápido / WhatsApp Direto
+
+[NAVBAR PRINCIPAL]
+- Logo Oficial R8 Motors (Vetor com cores oficiais Vermelho Racing e Branco)
+- Menu de Navegação:
+  * Estoque
+  * Financie Sem Entrada
+  * Sobre a R8 & Procedência
+  * Venda / Avaliação
+  * Onde Estamos
+- CTA Navbar: [ Fale no WhatsApp ]
+
+[HERO SECTION - IMPACTO COMERCIAL & CONVERSÃO]
++------------------------------------------------------------------------------+
+| [Tag: ESPECIALIZADA EM VEÍCULOS DE LEILÃO E SEMINOVOS COM GARANTIA]          |
+|                                                                              |
+| H1: FINANCIE SEU NOVO VEÍCULO SEM ENTRADA                                    |
+| Subtitle: Menores taxas do mercado, aprovação expressa via WhatsApp e        |
+| estoque periciado com garantia de motor e câmbio. Saia de carro novo hoje!   |
+|                                                                              |
+| [ CTA Primário: Simular Crédito Sem Entrada ]  [ CTA Secundário: Ver Estoque ]|
+|                                                                              |
+| [ Badges de Confiança: +1.500 Carros Entregues | 100% Periciado | Nota 5.0 ] |
+|                                                                              |
+| [ Painel Visual Hero com Arte Oficial R8 Motors: Fiat Fastback + Pulse ]     |
++------------------------------------------------------------------------------+
+
+[SIMULADOR RÁPIDO DE CRÉDITO SEM ENTRADA]
++------------------------------------------------------------------------------+
+| Simule sua Parcela Sem Entrada em 30 Segundos                                |
+| [Faixa de Parcela Desejada: R$ 990 a R$ 2.490/mês]                          |
+| [Tipo de Veículo: SUV | Sedan | Hatch]                                       |
+| [Botão: Consultar Aprovação de Crédito pelo WhatsApp]                       |
++------------------------------------------------------------------------------+
+
+[VITRINE DE ESTOQUE COM FILTROS EM TEMPO REAL]
++------------------------------------------------------------------------------+
+| Filtros Rápidos: [Todos] [SUVs] [Sedans] [Hatches] [Até R$ 80k] [Sem Entrada]|
+| Campo de busca por nome ou marca                                             |
+|                                                                              |
+| GRID DE VEÍCULOS (Cards Ricos):                                              |
+| +--------------------------------------------------------------------------+ |
+| | Foto do Veículo com Badge R8 Oficial | Selo "100% Laudo Aprovado"        | |
+| | Nome do Modelo (ex: Fiat Fastback Audace 1.0 Turbo 2023)                 | |
+| | Tags: Câmbio Automático | Km | Combustível | Cor                          | |
+| | Preço à Vista: R$ 109.900                                                | |
+| | Condição Especial: Financie Sem Entrada a partir de R$ 1.980/mês         | |
+| | [ Botão WhatsApp Contextualizado: "Quero Este Veículo" ]                 | |
+| +--------------------------------------------------------------------------+ |
++------------------------------------------------------------------------------+
+
+[BANNER PROMOCIONAL DE GARANTIA & PROCEDÊNCIA]
++------------------------------------------------------------------------------+
+| Destaque visual: Novos e Seminovos com Garantia e Procedência                |
+| Perícia Cautelar 100% Aprovada | Sem sinistros ocultos | Revisão Completa    |
++------------------------------------------------------------------------------+
+
+[AVALIE SEU CARRO NA TROCA]
++------------------------------------------------------------------------------+
+| Quer dar seu usado na troca ou vender? Avaliação justa em minutos            |
+| Passo a passo transparente com consultores reais                             |
++------------------------------------------------------------------------------+
+
+[LOCALIZAÇÃO, SHOWROOM & CONTATOS]
++------------------------------------------------------------------------------+
+| Av. Martim Francisco, 1104 - Santo André / SP                                |
+| Mapa Interativo / Link Waze e Google Maps                                    |
+| Instagram Oficial @r8motorsoficial | WhatsApp (11) 4975-3270                |
++------------------------------------------------------------------------------+
+
+[FOOTER INSTITUCIONAL & BOTÃO FLUTUANTE DE WHATSAPP COM RADAR PULSANTE]
+================================================================================

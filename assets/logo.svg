@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Red parallelogram accent -->
+  <path d="M40 8 L160 8 L130 68 L10 68 Z" fill="#D8001D" />
+  
+  <!-- R8 lettering with racing italics -->
+  <g transform="skewX(-14)">
+    <!-- R -->
+    <path d="M50 16 L82 16 C95 16 102 22 102 32 C102 39 97 45 88 47 L105 64 L86 64 L72 49 L66 49 L66 64 L50 64 Z M66 28 L66 38 L80 38 C85 38 88 36 88 33 C88 30 85 28 80 28 Z" fill="#FFFFFF" />
+    
+    <!-- 8 -->
+    <path d="M125 16 C138 16 146 23 146 32 C146 38 141 42 134 44 C143 46 149 52 149 59 C149 69 139 76 125 76 C111 76 101 69 101 59 C101 52 107 46 116 44 C109 42 104 38 104 32 C104 23 112 16 125 16 Z M125 26 C120 26 116 29 116 33 C116 37 120 40 125 40 C130 40 134 37 134 33 C134 29 130 26 125 26 Z M125 50 C119 50 114 54 114 59 C114 64 119 67 125 67 C131 67 136 64 136 59 C136 54 131 50 125 50 Z" fill="#FFFFFF" />
+  </g>
+  
+  <!-- MOTORS text -->
+  <text x="145" y="65" font-family="'Outfit', 'Impact', sans-serif" font-weight="900" font-style="italic" font-size="24" fill="#FFFFFF" letter-spacing="3">MOTORS</text>
+  
+  <!-- Subtitle small -->
+  <text x="146" y="77" font-family="'Inter', sans-serif" font-weight="700" font-size="7.5" fill="#94A3B8" letter-spacing="2">SEMINOVOS &amp; LEILÃO</text>
+</svg>
