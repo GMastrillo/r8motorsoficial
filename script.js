@@ -38,164 +38,34 @@ const initR8App = () => {
     }
   }
 
-  // 3. Orquestração de Entrada Cinemática (Showroom Reveal & Telemetria)
-  const cinematicIntro = document.getElementById('cinematicIntro');
-  const cinematicSkip = document.getElementById('cinematicSkip');
-  const cinematicCounter = document.getElementById('cinematicCounter');
-  const hudProgress = document.querySelector('.hud-circle-progress');
-  const laserSweep = document.querySelector('.cinematic-laser-sweep');
-  const headlightsGlow = document.querySelector('.hero__headlights-glow');
+  // 3. Orquestração da Entrada Cinemática (Curtain Reveal)
+  const curtain = document.getElementById('cinematicCurtain');
+  if (curtain) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      curtain.remove();
+    } else {
+      let dismissed = false;
+      const dismissCurtain = () => {
+        if (dismissed) return;
+        dismissed = true;
+        curtain.classList.add('cinematic-curtain--opening');
+        setTimeout(() => {
+          if (curtain && curtain.parentNode) {
+            curtain.remove();
+          }
+        }, 750);
+      };
 
-  if (cinematicIntro && !prefersReducedMotion && typeof gsap !== 'undefined') {
-    // Travar scroll durante a revelação cinemática
-    document.body.style.overflow = 'hidden';
+      // Abre automaticamente após o efeito de ignição (950ms)
+      setTimeout(dismissCurtain, 950);
 
-    let introFinished = false;
-    let counterInterval = null;
-
-    // Contador de telemetria rápido e fluido (000 -> 100 KM/H)
-    let currentSpeed = 0;
-    counterInterval = setInterval(() => {
-      currentSpeed += 4;
-      if (currentSpeed >= 100) {
-        currentSpeed = 100;
-        clearInterval(counterInterval);
-      }
-      if (cinematicCounter) {
-        cinematicCounter.textContent = String(currentSpeed).padStart(3, '0');
-      }
-    }, 28);
-
-    const finishIntro = () => {
-      if (introFinished) return;
-      introFinished = true;
-      if (counterInterval) clearInterval(counterInterval);
-      document.body.style.overflow = '';
-      if (cinematicIntro) {
-        cinematicIntro.classList.add('cinematic-intro--completed');
-      }
-    };
-
-    const introTl = gsap.timeline({
-      defaults: { ease: 'power3.out' },
-      onComplete: finishIntro
-    });
-
-    // Auto-concluir no final da transição (1.85s)
-    setTimeout(finishIntro, 1850);
-
-    // Pular animação no botão ou tecla ESC
-    if (cinematicSkip) {
-      cinematicSkip.addEventListener('click', () => {
-        introTl.progress(1);
-        finishIntro();
+      // Clique ou tecla ESC para dispensar instantaneamente
+      curtain.addEventListener('click', dismissCurtain);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') dismissCurtain();
       });
     }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !introFinished) {
-        introTl.progress(1);
-        finishIntro();
-      }
-    });
-
-    // Animação de telemetria (000 a 100 KM/H)
-    const telemetryObj = { speed: 0 };
-
-    introTl
-      // Fase 1: Ignição, Tacômetro & Laser Sweep (0s - 0.75s)
-      .to(telemetryObj, {
-        speed: 100,
-        duration: 0.75,
-        ease: 'power2.inOut',
-        onUpdate: () => {
-          if (cinematicCounter) {
-            cinematicCounter.textContent = String(Math.floor(telemetryObj.speed)).padStart(3, '0');
-          }
-        }
-      }, 0)
-      .to(hudProgress, {
-        strokeDashoffset: 0,
-        duration: 0.75,
-        ease: 'power2.inOut'
-      }, 0)
-      .fromTo(laserSweep, 
-        { left: '-120%' }, 
-        { left: '160%', duration: 0.65, ease: 'power2.inOut' }, 
-        0.1
-      )
-      .to('.cinematic-glow--red', {
-        scale: 1.45,
-        opacity: 0.85,
-        duration: 0.4,
-        yoyo: true,
-        repeat: 1
-      }, 0.2)
-      // Fase 2: Laser Flare Flash & Abertura dos Shutters (0.75s - 1.35s)
-      .fromTo('#cinematicFlare', 
-        { scaleX: 0, opacity: 0 }, 
-        { scaleX: 1, opacity: 1, duration: 0.2, ease: 'power1.out' }, 
-        0.72
-      )
-      .to('#cinematicFlare', {
-        opacity: 0,
-        duration: 0.25,
-        ease: 'power2.in'
-      }, 0.88)
-      .to('.cinematic-stage', {
-        scale: 1.1,
-        opacity: 0,
-        duration: 0.35,
-        ease: 'power2.in'
-      }, 0.75)
-      .to('.cinematic-shutter--top', {
-        yPercent: -100,
-        duration: 0.65,
-        ease: 'power4.inOut'
-      }, 0.8)
-      .to('.cinematic-shutter--bottom', {
-        yPercent: 100,
-        duration: 0.65,
-        ease: 'power4.inOut'
-      }, 0.8)
-      // Fase 3: Revelação do Hero & Acendimento dos Faróis (0.85s - 1.8s)
-      .fromTo('.hero__image-wrapper', 
-        { scale: 1.15, filter: 'blur(12px) brightness(0.55)' }, 
-        { scale: 1, filter: 'blur(0px) brightness(1)', duration: 0.95, ease: 'power3.out' }, 
-        0.85
-      )
-      .fromTo(headlightsGlow, 
-        { opacity: 0 }, 
-        { opacity: 0.9, duration: 0.3, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 
-        1.1
-      )
-      .fromTo('.hero__title', 
-        { opacity: 0, y: 35, letterSpacing: '0.04em' }, 
-        { opacity: 1, y: 0, letterSpacing: '-0.02em', duration: 0.8, ease: 'power3.out' }, 
-        0.95
-      )
-      .fromTo('.hero__badge', 
-        { opacity: 0, y: -20 }, 
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 
-        1.05
-      )
-      .fromTo('.hero__subtitle', 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 
-        1.15
-      )
-      .fromTo('.hero__actions', 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 
-        1.25
-      )
-      .fromTo('.hero__stats', 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 
-        1.3
-      );
-  } else if (cinematicIntro) {
-    cinematicIntro.classList.add('cinematic-intro--completed');
   }
 
   // Navbar Scroll Effect
