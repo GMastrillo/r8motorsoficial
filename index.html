@@ -73,6 +73,44 @@
 </head>
 <body>
 
+  <!-- ================= ENTRADA CINEMATOGRÁFICA / SHOWROOM REVEAL ================= -->
+  <aside class="cinematic-intro" id="cinematicIntro" aria-label="Apresentação R8 Motors">
+    <div class="cinematic-shutter cinematic-shutter--top"></div>
+    <div class="cinematic-shutter cinematic-shutter--bottom"></div>
+    
+    <div class="cinematic-stage">
+      <div class="cinematic-glow cinematic-glow--red" aria-hidden="true"></div>
+      <div class="cinematic-glow cinematic-glow--blue" aria-hidden="true"></div>
+      
+      <!-- Tacômetro / Ring de Telemetria Automotiva -->
+      <div class="cinematic-hud">
+        <svg class="cinematic-hud__ring" viewBox="0 0 160 160" aria-hidden="true">
+          <circle class="hud-circle-bg" cx="80" cy="80" r="72" />
+          <circle class="hud-circle-progress" cx="80" cy="80" r="72" />
+        </svg>
+        <div class="cinematic-logo-box">
+          <img src="assets/logo.svg" alt="R8 Motors Oficial" class="cinematic-logo" width="220" height="64">
+          <div class="cinematic-laser-sweep"></div>
+        </div>
+      </div>
+
+      <div class="cinematic-meta">
+        <span class="cinematic-tag">SHOWROOM DIGITAL &bull; SANTO ANDRÉ</span>
+        <div class="cinematic-counter">
+          <span class="cinematic-counter__val" id="cinematicCounter">000</span>
+          <span class="cinematic-counter__unit">KM/H</span>
+        </div>
+      </div>
+
+      <button type="button" class="cinematic-skip" id="cinematicSkip" aria-label="Pular introdução cinematográfica">
+        Pular [ESC]
+      </button>
+    </div>
+    
+    <!-- Feixe de Luz / Laser Flare na Abertura dos Shutters -->
+    <div class="cinematic-flare" id="cinematicFlare" aria-hidden="true"></div>
+  </aside>
+
   <!-- ================= TOPBAR INSTITUCIONAL ================= -->
   <aside class="topbar" aria-label="Informações de Atendimento">
     <div class="container topbar__inner">
@@ -212,6 +250,7 @@
         <div class="hero__visual">
           <div class="hero__image-wrapper">
             <img src="assets/hero-cars.png" alt="Veículos em Destaque na R8 Motors: Fiat Fastback e Pulse" class="hero__image" width="700" height="700" fetchpriority="high">
+            <div class="hero__headlights-glow" aria-hidden="true"></div>
             <div class="hero__card-floating hero__card-floating--left">
               <div class="hero__card-icon">
                 <i data-lucide="shield-check" class="icon-md"></i>

@@ -281,6 +281,299 @@ ul, ol {
 .icon-gold { color: var(--color-accent-gold); }
 
 /* ==========================================================================
+   CINEMATIC INTRO / OVERLAY DE ENTRADA (SHOWROOM REVEAL)
+   ========================================================================== */
+
+@keyframes intro-dismiss {
+  0%, 75% {
+    opacity: 1;
+    pointer-events: all;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+@keyframes shutter-open-top {
+  0%, 55% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes shutter-open-bottom {
+  0%, 55% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes stage-fade-out {
+  0%, 48% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  68%, 100% {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+  }
+}
+
+@keyframes laser-sweep-anim {
+  0% { left: -120%; }
+  100% { left: 160%; }
+}
+
+@keyframes hud-ring-progress {
+  0% { stroke-dashoffset: 452; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes flare-flash {
+  0%, 45% {
+    transform: translateY(-50%) scaleX(0);
+    opacity: 0;
+  }
+  58% {
+    transform: translateY(-50%) scaleX(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: translateY(-50%) scaleX(1.3);
+    opacity: 0;
+  }
+}
+
+.cinematic-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  overflow: hidden;
+  background: transparent;
+  animation: intro-dismiss 1.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.cinematic-intro--completed {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.cinematic-shutter {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%;
+  background: radial-gradient(circle at 50% 50%, #060B24 0%, #02040C 100%);
+  z-index: 1;
+  will-change: transform;
+}
+
+.cinematic-shutter--top {
+  top: 0;
+  transform-origin: top center;
+  border-bottom: 2px solid rgba(216, 0, 29, 0.55);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.95);
+  animation: shutter-open-top 1.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.cinematic-shutter--bottom {
+  bottom: 0;
+  transform-origin: bottom center;
+  border-top: 2px solid rgba(216, 0, 29, 0.55);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.95);
+  animation: shutter-open-bottom 1.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.cinematic-stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: all;
+  padding: var(--space-6);
+  will-change: transform, opacity;
+  animation: stage-fade-out 1.5s ease-in-out forwards;
+}
+
+.cinematic-glow {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.45;
+  will-change: transform, opacity;
+}
+
+.cinematic-glow--red {
+  background: radial-gradient(circle, rgba(216, 0, 29, 0.7) 0%, transparent 70%);
+}
+
+.cinematic-glow--blue {
+  background: radial-gradient(circle, rgba(10, 19, 110, 0.9) 0%, transparent 70%);
+  transform: translate(20px, 20px);
+}
+
+.cinematic-hud {
+  position: relative;
+  width: 260px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.cinematic-hud__ring {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.hud-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2;
+}
+
+.hud-circle-progress {
+  fill: none;
+  stroke: var(--color-brand-red);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 452;
+  stroke-dashoffset: 452;
+  filter: drop-shadow(0 0 12px rgba(216, 0, 29, 0.9));
+  animation: hud-ring-progress 0.85s ease-in-out 0.05s forwards;
+  will-change: stroke-dashoffset;
+}
+
+.cinematic-logo-box {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 1.25rem;
+}
+
+.cinematic-logo {
+  height: 52px;
+  width: auto;
+  filter: drop-shadow(0 0 25px rgba(216, 0, 29, 0.5));
+}
+
+.cinematic-laser-sweep {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 50%, rgba(216, 0, 29, 0.85) 80%, transparent 100%);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: laser-sweep-anim 0.8s ease-in-out 0.15s forwards;
+  will-change: left;
+}
+
+.cinematic-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cinematic-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: #94A3B8;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.cinematic-counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-display);
+}
+
+.cinematic-counter__val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+}
+
+.cinematic-counter__unit {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-brand-red);
+  letter-spacing: 0.1em;
+}
+
+.cinematic-skip {
+  margin-top: var(--space-6);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #64748B;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cinematic-skip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border-color: rgba(216, 0, 29, 0.5);
+}
+
+.cinematic-flare {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #FFFFFF 50%, var(--color-brand-red) 70%, transparent 100%);
+  transform: translateY(-50%) scaleX(0);
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 0 30px #FFFFFF, 0 0 60px var(--color-brand-red);
+  animation: flare-flash 1.6s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-intro {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
    TOPBAR
    ========================================================================== */
 
@@ -662,10 +955,44 @@ ul, ol {
   position: relative;
 }
 
+@keyframes hero-cars-enter {
+  0% {
+    transform: scale(1.1);
+    filter: blur(8px) brightness(0.65);
+  }
+  100% {
+    transform: scale(1);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+@keyframes headlights-flash {
+  0%, 40% { opacity: 0; }
+  60% { opacity: 0.95; }
+  85% { opacity: 0.3; }
+  95% { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+
 .hero__image-wrapper {
   position: relative;
   border-radius: var(--radius-xl);
   overflow: visible;
+  will-change: transform, filter;
+  animation: hero-cars-enter 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+}
+
+.hero__headlights-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at 62% 68%, rgba(255, 255, 255, 0.55) 0%, rgba(216, 0, 29, 0.3) 25%, transparent 60%),
+              radial-gradient(circle at 78% 68%, rgba(255, 255, 255, 0.55) 0%, rgba(56, 189, 248, 0.3) 25%, transparent 60%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  will-change: opacity;
+  animation: headlights-flash 1.8s ease-in-out 0.7s forwards;
 }
 
 .hero__image {
