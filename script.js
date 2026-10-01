@@ -1,84 +1,65 @@
 /**
  * R8 MOTORS OFICIAL - SCRIPTS DE INTERATIVIDADE & MOTION
- * Inclui: Lenis Smooth Scroll, GSAP, Filtros de Estoque em Tempo Real,
- * Simulador de Financiamento Sem Entrada e Integração Dinâmica com WhatsApp.
+ * Motor de Animação: GSAP 3.12.5 + ScrollTrigger + Lenis Smooth Scroll (Local Vendor)
+ * Inclui: Orquestração Hero, Contadores Numéricos, Filtros em Tempo Real,
+ * Simulador de Financiamento Sem Entrada, Efeitos 3D e Integração WhatsApp.
  */
 
 const initR8App = () => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // 1. Inicializar Ícones Lucide
-  if (window.lucide) {
-    window.lucide.createIcons();
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    try {
+      window.lucide.createIcons();
+    } catch (e) {
+      console.warn('Lucide icon init warning:', e);
+    }
   }
 
-  // 2. Smooth Scroll com Lenis (respeitando prefers-reduced-motion)
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 2. Registrar Plugins GSAP
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    try {
+      gsap.registerPlugin(ScrollTrigger);
+    } catch (e) {
+      console.warn('GSAP ScrollTrigger register warning:', e);
+    }
+  }
+
+  // 3. Smooth Scroll com Lenis perfeitamente sincronizado com ScrollTrigger
   let lenisInstance = null;
 
   if (!prefersReducedMotion && typeof Lenis !== 'undefined') {
-    lenisInstance = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-    });
-
-    function raf(time) {
-      lenisInstance.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // Integrar com GSAP ScrollTrigger se disponível
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      lenisInstance.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((time) => {
-        lenisInstance.raf(time * 1000);
+    try {
+      lenisInstance = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 0.95,
       });
-      gsap.ticker.lagSmoothing(0);
+
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        lenisInstance.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          lenisInstance.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      } else {
+        const raf = (time) => {
+          lenisInstance.raf(time);
+          requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+      }
+    } catch (e) {
+      console.warn('Lenis init warning:', e);
     }
   }
 
-  // 3. Orquestração da Entrada Cinemática (Curtain Reveal)
-  const curtain = document.getElementById('cinematicCurtain');
-  if (curtain) {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      curtain.remove();
-    } else {
-      let dismissed = false;
-      const dismissCurtain = () => {
-        if (dismissed) return;
-        dismissed = true;
-        curtain.classList.add('cinematic-curtain--opening');
-        setTimeout(() => {
-          if (curtain && curtain.parentNode) {
-            curtain.remove();
-          }
-        }, 750);
-      };
+  // 4. Disparo Imediato da Orquestração GSAP
+  initGSAPMotionSuite();
 
-      // Abre automaticamente após o efeito de ignição (950ms)
-      setTimeout(dismissCurtain, 950);
-
-      // Clique ou tecla ESC para dispensar instantaneamente
-      curtain.addEventListener('click', dismissCurtain);
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') dismissCurtain();
-      });
-    }
-  }
-
-  // Navbar Scroll Effect
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add('navbar--scrolled');
-    } else {
-      navbar.classList.remove('navbar--scrolled');
-    }
-  });
-
-  // 4. Catálogo de Estoque Dinâmico (Seminovos e Veículos Periciados da Loja)
+  // 5. Catálogo de Estoque Dinâmico
   const inventory = [
     {
       id: 1,
@@ -222,7 +203,8 @@ const initR8App = () => {
     return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
   }
 
-  function renderInventory() {
+  function renderInventory(isInitial = false) {
+    if (!stockGrid) return;
     stockGrid.innerHTML = '';
 
     const filtered = inventory.filter((car) => {
@@ -313,12 +295,64 @@ const initR8App = () => {
       stockGrid.appendChild(card);
     });
 
-    if (window.lucide) {
-      window.lucide.createIcons({ root: stockGrid });
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      try {
+        window.lucide.createIcons({ root: stockGrid });
+      } catch (e) {}
+    }
+
+    // Animação de entrada dos cards com GSAP
+    if (!prefersReducedMotion && typeof gsap !== 'undefined') {
+      const cards = stockGrid.querySelectorAll('.car-card');
+      if (isInitial) {
+        if (typeof ScrollTrigger !== 'undefined') {
+          gsap.fromTo(cards, 
+            { opacity: 0, y: 40, scale: 0.96 }, 
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.08,
+              ease: 'power2.out',
+              clearProps: 'transform',
+              scrollTrigger: {
+                trigger: '#stockGrid',
+                start: 'top 85%',
+                once: true
+              }
+            }
+          );
+        } else {
+          gsap.fromTo(cards, 
+            { opacity: 0, y: 25 }, 
+            { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform' }
+          );
+        }
+      } else {
+        // Ao filtrar ou buscar, faz transição cascata imediata
+        gsap.fromTo(cards, 
+          { opacity: 0, y: 25, scale: 0.97 }, 
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.45,
+            stagger: 0.06,
+            ease: 'power2.out',
+            clearProps: 'transform'
+          }
+        );
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
     }
   }
 
-  renderInventory();
+  // Render inicial do estoque
+  renderInventory(true);
 
   // Filtros por Categoria
   filterBtns.forEach((btn) => {
@@ -326,23 +360,23 @@ const initR8App = () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentCategory = btn.dataset.filter;
-      renderInventory();
+      renderInventory(false);
     });
   });
 
-  // Busca em Tempo Real com Debounce Leve
+  // Busca em Tempo Real com Debounce
   if (searchInput) {
     let debounceTimer;
     searchInput.addEventListener('input', (e) => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         currentSearch = e.target.value.trim();
-        renderInventory();
+        renderInventory(false);
       }, 150);
     });
   }
 
-  // 5. Simulador Interativo de Financiamento Sem Entrada
+  // 6. Simulador Interativo de Financiamento Sem Entrada
   const rangeParcela = document.getElementById('rangeParcela');
   const valorParcelaDisplay = document.getElementById('valorParcelaDisplay');
   const summaryParcelaDisplay = document.getElementById('summaryParcelaDisplay');
@@ -367,6 +401,13 @@ const initR8App = () => {
     if (btnAprovarCreditoWhatsApp) {
       const message = `Olá equipe R8 Motors! Simulei pelo site oficial uma parcela de ${formatParcela}/mês em ${selectedMeses}x para a categoria ${selectedCategoria} SEM ENTRADA. Como posso aprovar meu crédito?`;
       btnAprovarCreditoWhatsApp.href = `https://wa.me/551149753270?text=${encodeURIComponent(message)}`;
+    }
+
+    if (!prefersReducedMotion && typeof gsap !== 'undefined') {
+      gsap.fromTo('#summaryParcelaDisplay', 
+        { scale: 1.05 }, 
+        { scale: 1, duration: 0.2, ease: 'power2.out' }
+      );
     }
   }
 
@@ -397,7 +438,7 @@ const initR8App = () => {
 
   updateSimuladorLink();
 
-  // 6. Modal de Detalhes do Veículo
+  // 7. Modal de Detalhes do Veículo
   const carModal = document.getElementById('carModal');
   const modalOverlay = document.getElementById('modalOverlay');
   const modalClose = document.getElementById('modalClose');
@@ -464,19 +505,45 @@ const initR8App = () => {
       </div>
     `;
 
-    if (window.lucide) {
-      window.lucide.createIcons({ root: modalBody });
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      try {
+        window.lucide.createIcons({ root: modalBody });
+      } catch (e) {}
     }
 
     carModal.classList.add('active');
     carModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    if (!prefersReducedMotion && typeof gsap !== 'undefined') {
+      gsap.fromTo('.modal__overlay', { opacity: 0 }, { opacity: 1, duration: 0.3 });
+      gsap.fromTo('.modal__container', 
+        { scale: 0.92, y: 30, opacity: 0 }, 
+        { scale: 1, y: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
+      );
+    }
   }
 
   function closeModal() {
-    carModal.classList.remove('active');
-    carModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    if (!prefersReducedMotion && typeof gsap !== 'undefined') {
+      gsap.to('.modal__container', {
+        scale: 0.95,
+        y: 20,
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in',
+        onComplete: () => {
+          carModal.classList.remove('active');
+          carModal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+      gsap.to('.modal__overlay', { opacity: 0, duration: 0.25 });
+    } else {
+      carModal.classList.remove('active');
+      carModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
   }
 
   document.addEventListener('click', (e) => {
@@ -496,7 +563,7 @@ const initR8App = () => {
     }
   });
 
-  // 7. Menu Mobile Drawer
+  // 8. Menu Mobile Drawer
   const menuToggle = document.getElementById('menuToggle');
   const menuClose = document.getElementById('menuClose');
   const mobileDrawer = document.getElementById('mobileDrawer');
@@ -518,7 +585,7 @@ const initR8App = () => {
   if (menuClose) menuClose.addEventListener('click', closeDrawer);
   mobileLinks.forEach(link => link.addEventListener('click', closeDrawer));
 
-  // 8. Formulário de Avaliação de Usado (Trade-in)
+  // 9. Formulário de Avaliação de Usado (Trade-in)
   const tradeForm = document.getElementById('tradeForm');
   if (tradeForm) {
     tradeForm.addEventListener('submit', (e) => {
@@ -534,7 +601,372 @@ const initR8App = () => {
     });
   }
 
-  // 9. Função Global para links rápidos de categoria no footer
+  // Navbar Scroll Background
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navbar.classList.add('navbar--scrolled');
+    } else {
+      navbar.classList.remove('navbar--scrolled');
+    }
+  }, { passive: true });
+
+  // 10. SUITE COMPLETA DE ANIMAÇÕES GSAP & SCROLLTRIGGER
+  function initGSAPMotionSuite() {
+    if (prefersReducedMotion || typeof gsap === 'undefined') return;
+
+    try {
+      // --- A. ORQUESTRAÇÃO DE ENTRADA DO HERO SECTION ---
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      heroTl
+        .fromTo('.hero__badge', 
+          { y: -25, opacity: 0, scale: 0.92 }, 
+          { y: 0, opacity: 1, scale: 1, duration: 0.65 }
+        )
+        .fromTo('.hero__title', 
+          { y: 40, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 0.85, ease: 'power4.out' }, 
+          '-=0.4'
+        )
+        .fromTo('.hero__subtitle', 
+          { y: 25, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 0.7 }, 
+          '-=0.5'
+        )
+        .fromTo('.hero__actions .btn', 
+          { y: 25, opacity: 0, scale: 0.95 }, 
+          { y: 0, opacity: 1, scale: 1, stagger: 0.12, duration: 0.6, ease: 'back.out(1.4)' }, 
+          '-=0.4'
+        )
+        .fromTo('.hero__stats .stat-item', 
+          { y: 20, opacity: 0 }, 
+          { y: 0, opacity: 1, stagger: 0.1, duration: 0.5 }, 
+          '-=0.3'
+        );
+
+      // Contadores Numéricos Animados no Hero
+      const statValues = document.querySelectorAll('.stat-item__value');
+      if (statValues.length >= 2) {
+        const counter1 = { val: 0 };
+        gsap.to(counter1, {
+          val: 1800,
+          duration: 2.2,
+          ease: 'power2.out',
+          delay: 0.2,
+          onUpdate: () => {
+            statValues[0].textContent = `+${Math.floor(counter1.val).toLocaleString('pt-BR')}`;
+          }
+        });
+
+        const counter2 = { val: 0 };
+        gsap.to(counter2, {
+          val: 100,
+          duration: 1.8,
+          ease: 'power2.out',
+          delay: 0.4,
+          onUpdate: () => {
+            statValues[1].textContent = `${Math.floor(counter2.val)}%`;
+          }
+        });
+      }
+
+      // Entrada Cinemática do Carro no Hero
+      heroTl.fromTo('.hero__image-wrapper', 
+        { scale: 1.1, opacity: 0, y: 35 }, 
+        { 
+          scale: 1, 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          ease: 'power3.out',
+          onComplete: () => {
+            // Efeito de Ignição dos Faróis (Double Flash LED)
+            gsap.timeline()
+              .to('.hero__headlights-glow', { opacity: 0.95, duration: 0.2, ease: 'power2.inOut' })
+              .to('.hero__headlights-glow', { opacity: 0.2, duration: 0.15 })
+              .to('.hero__headlights-glow', { opacity: 1, duration: 0.25 })
+              .to('.hero__headlights-glow', { opacity: 0.5, duration: 0.8, ease: 'power2.out' });
+          }
+        }, 
+        '-=1.2'
+      );
+
+      // Cards Flutuantes de Destaque no Hero
+      heroTl.fromTo('.hero__card-floating', 
+        { scale: 0.75, opacity: 0, y: 25 }, 
+        { 
+          scale: 1, 
+          opacity: 1, 
+          y: 0, 
+          stagger: 0.15, 
+          duration: 0.7, 
+          ease: 'back.out(1.7)',
+          onComplete: () => {
+            gsap.to('.hero__card-floating--left', {
+              y: -10,
+              duration: 3,
+              repeat: -1,
+              yoyo: true,
+              ease: 'sine.inOut'
+            });
+            gsap.to('.hero__card-floating--right', {
+              y: -12,
+              duration: 3.5,
+              repeat: -1,
+              yoyo: true,
+              ease: 'sine.inOut',
+              delay: 0.4
+            });
+          }
+        }, 
+        '-=0.4'
+      );
+
+      // Mouse Parallax 3D sutil na imagem do Hero (Desktop)
+      const heroVisual = document.querySelector('.hero__visual');
+      const heroImgWrapper = document.querySelector('.hero__image-wrapper');
+      if (heroVisual && heroImgWrapper && window.innerWidth > 992) {
+        heroVisual.addEventListener('mousemove', (e) => {
+          const rect = heroVisual.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          gsap.to(heroImgWrapper, {
+            rotateY: x * 8,
+            rotateX: -y * 8,
+            duration: 0.6,
+            ease: 'power1.out',
+            transformPerspective: 1000,
+          });
+        });
+        heroVisual.addEventListener('mouseleave', () => {
+          gsap.to(heroImgWrapper, {
+            rotateY: 0,
+            rotateX: 0,
+            duration: 0.9,
+            ease: 'power2.out',
+          });
+        });
+      }
+
+      if (typeof ScrollTrigger === 'undefined') return;
+
+      // --- B. CABEÇALHOS DE SEÇÃO COM SCROLLTRIGGER ---
+      const sectionHeaders = document.querySelectorAll('.section-header, .simulador-card__header');
+      sectionHeaders.forEach((header) => {
+        gsap.fromTo(header.children, 
+          { y: 35, opacity: 0 }, 
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.75,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: header,
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      });
+
+      // --- C. SEÇÃO SIMULADOR DE FINANCIAMENTO ---
+      gsap.fromTo('.simulador-card', 
+        { y: 45, opacity: 0, scale: 0.97 }, 
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#simulador',
+            start: 'top 80%',
+            once: true
+          }
+        }
+      );
+
+      gsap.fromTo('.simulador-form', 
+        { x: -35, opacity: 0 }, 
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.simulador-card__body',
+            start: 'top 85%',
+            once: true
+          }
+        }
+      );
+
+      gsap.fromTo('.simulador-summary', 
+        { x: 35, opacity: 0, scale: 0.96 }, 
+        {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.simulador-card__body',
+            start: 'top 85%',
+            once: true
+          }
+        }
+      );
+
+      // --- D. BANNERS DE PROCEDÊNCIA & GARANTIA ---
+      const promoCards = document.querySelectorAll('.promo-card');
+      if (promoCards.length > 0) {
+        gsap.fromTo(promoCards, 
+          { y: 45, opacity: 0, scale: 0.96 }, 
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            stagger: 0.2,
+            duration: 0.85,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#procedencia',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // --- E. DIFERENCIAIS / PILARES R8 MOTORS ---
+      const featureItems = document.querySelectorAll('.feature-item');
+      if (featureItems.length > 0) {
+        gsap.fromTo(featureItems, 
+          { y: 35, opacity: 0 }, 
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.08,
+            duration: 0.65,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.features-grid',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // --- F. AVALIAÇÃO / VENDA DE CARRO (TRADE-IN) ---
+      const tradeBox = document.querySelector('.trade-box');
+      if (tradeBox) {
+        gsap.fromTo('.trade-box__text', 
+          { x: -35, opacity: 0 }, 
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#avaliacao',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+
+        gsap.fromTo('.trade-box__steps .step-card', 
+          { x: -20, opacity: 0 }, 
+          {
+            x: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.trade-box__steps',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+
+        gsap.fromTo('.trade-box__form-card', 
+          { x: 35, opacity: 0, scale: 0.97 }, 
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#avaliacao',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // --- G. LOCALIZAÇÃO & SHOWROOM ---
+      const locationSection = document.getElementById('localizacao');
+      if (locationSection) {
+        gsap.fromTo('.location-card', 
+          { x: -35, opacity: 0 }, 
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#localizacao',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+
+        gsap.fromTo('.location-map', 
+          { y: 40, opacity: 0, scale: 0.96 }, 
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.85,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#localizacao',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // --- H. BOTÃO FLUTUANTE DO WHATSAPP COM ENTRADA EM MOLA ---
+      const whatsappFloating = document.querySelector('.whatsapp-floating');
+      if (whatsappFloating) {
+        gsap.set(whatsappFloating, { scale: 0, opacity: 0 });
+        let waShown = false;
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 280 && !waShown) {
+            waShown = true;
+            gsap.to(whatsappFloating, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(1.7)' });
+          } else if (window.scrollY <= 280 && waShown) {
+            waShown = false;
+            gsap.to(whatsappFloating, { scale: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+          }
+        }, { passive: true });
+      }
+    } catch (err) {
+      console.warn('GSAP motion suite warning:', err);
+    }
+  }
+
+  // 11. Função Global para links rápidos de categoria no footer
   window.filterBy = function(category) {
     const targetBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
     if (targetBtn) {

@@ -281,126 +281,6 @@ ul, ol {
 .icon-gold { color: var(--color-accent-gold); }
 
 /* ==========================================================================
-   CINEMATIC CURTAIN REVEAL (SHOWROOM ENTRANCE)
-   ========================================================================== */
-
-.cinematic-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  background: radial-gradient(circle at 50% 45%, #0B1238 0%, #030511 80%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  will-change: transform;
-  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
-  cursor: pointer;
-}
-
-.cinematic-curtain.cinematic-curtain--opening {
-  transform: translateY(-100%);
-  pointer-events: none;
-}
-
-.cinematic-curtain__glow {
-  position: absolute;
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(216, 0, 29, 0.35) 0%, rgba(10, 19, 110, 0.5) 50%, transparent 75%);
-  filter: blur(80px);
-  pointer-events: none;
-  animation: pulse-curtain-glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-curtain-glow {
-  0% { transform: scale(0.9); opacity: 0.6; }
-  100% { transform: scale(1.15); opacity: 0.9; }
-}
-
-.cinematic-curtain__content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  text-align: center;
-  padding: var(--space-4);
-}
-
-.cinematic-curtain__logo-wrapper {
-  position: relative;
-  overflow: hidden;
-  padding: 0.5rem 1.5rem;
-}
-
-.cinematic-curtain__logo {
-  height: 54px;
-  width: auto;
-  filter: drop-shadow(0 0 30px rgba(216, 0, 29, 0.5));
-}
-
-.cinematic-curtain__shine {
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 70%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, rgba(216, 0, 29, 0.8) 80%, transparent 100%);
-  transform: skewX(-22deg);
-  animation: curtain-shine 1s ease-in-out 0.1s forwards;
-}
-
-@keyframes curtain-shine {
-  0% { left: -120%; }
-  100% { left: 160%; }
-}
-
-.cinematic-curtain__tag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.28em;
-  color: #94A3B8;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-top: 4px;
-}
-
-.cinematic-curtain__loader {
-  width: 140px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  margin-top: var(--space-2);
-  position: relative;
-}
-
-.cinematic-curtain__bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #D8001D, #FF4D5E);
-  box-shadow: 0 0 10px #D8001D;
-  animation: load-ignition 0.85s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-@keyframes load-ignition {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cinematic-curtain {
-    display: none !important;
-  }
-}
-
-/* ==========================================================================
    TOPBAR
    ========================================================================== */
 
@@ -780,33 +660,15 @@ ul, ol {
 
 .hero__visual {
   position: relative;
-}
-
-@keyframes hero-cars-enter {
-  0% {
-    transform: scale(1.1);
-    filter: blur(8px) brightness(0.65);
-  }
-  100% {
-    transform: scale(1);
-    filter: blur(0px) brightness(1);
-  }
-}
-
-@keyframes headlights-flash {
-  0%, 40% { opacity: 0; }
-  60% { opacity: 0.95; }
-  85% { opacity: 0.3; }
-  95% { opacity: 0.85; }
-  100% { opacity: 0; }
+  perspective: 1000px;
 }
 
 .hero__image-wrapper {
   position: relative;
   border-radius: var(--radius-xl);
   overflow: visible;
-  will-change: transform, filter;
-  animation: hero-cars-enter 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
 }
 
 .hero__headlights-glow {
@@ -819,7 +681,6 @@ ul, ol {
   opacity: 0;
   mix-blend-mode: screen;
   will-change: opacity;
-  animation: headlights-flash 1.8s ease-in-out 0.7s forwards;
 }
 
 .hero__image {
@@ -848,7 +709,7 @@ ul, ol {
   font-size: var(--text-xs);
   color: var(--color-text-secondary);
   z-index: 2;
-  animation: float-subtle 4s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .hero__card-floating strong {
@@ -865,7 +726,6 @@ ul, ol {
 .hero__card-floating--right {
   top: 10%;
   right: -4%;
-  animation-delay: -2s;
 }
 
 .hero__card-icon {
@@ -883,11 +743,6 @@ ul, ol {
 .hero__card-icon--gold {
   background-color: var(--color-accent-gold-bg);
   color: var(--color-accent-gold);
-}
-
-@keyframes float-subtle {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-10px); }
 }
 
 @media (max-width: 640px) {
